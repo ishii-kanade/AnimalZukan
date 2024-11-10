@@ -1,0 +1,61 @@
+type Animal {
+  animalID: ID!
+
+  commonName: String!
+
+  scientificName: String!
+
+  description: String!
+
+  soundURL: String!
+
+  imageURL: String!
+
+  habitat: String!
+
+  diet: String!
+
+  lifespan: String!
+
+  conservationStatus: String!
+}
+
+type Artwork {
+  objectID: ID!
+
+  title: String!
+
+  artistDisplayName: String!
+
+  medium: String!
+
+  dimensions: String!
+
+  objectURL: String!
+
+  objectDate: String!
+
+  primaryImage: String!
+
+  primaryImageSmall: String!
+
+  repository: String!
+
+  department: String!
+
+  creditLine: String!
+}
+
+type Query {
+  artworks(limit: Int): [Artwork!]!
+
+  artworkByID(objectID: ID!): Artwork
+
+  animals(limit: Int): [Animal!]!
+
+  animalByID(animalID: ID!): Animal
+}
+
+schema {
+  query: Query
+}

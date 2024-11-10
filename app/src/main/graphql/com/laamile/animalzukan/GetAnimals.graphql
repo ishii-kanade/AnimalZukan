@@ -1,0 +1,15 @@
+query GetAnimals($limit: Int!) {
+    animals(limit: $limit) {
+        animalID
+        commonName
+        scientificName
+        description
+        soundURL
+        imageURL
+        habitat
+        diet
+        lifespan
+        conservationStatus
+    }
+}
+
