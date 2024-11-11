@@ -12,9 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.laamile.animalzukan.ui.theme.AnimalZukanTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val animalRepository = AnimalRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +24,7 @@ class MainActivity : ComponentActivity() {
             AnimalZukanTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AnimalListScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        animalRepository = animalRepository
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
