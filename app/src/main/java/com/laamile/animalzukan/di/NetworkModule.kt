@@ -1,6 +1,7 @@
-package com.laamile.animalzukan
+package com.laamile.animalzukan.di
 
 import com.apollographql.apollo3.ApolloClient
+import com.laamile.animalzukan.AnimalZukanApolloClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
