@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.apollographql.apollo3").version("3.7.3")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -59,7 +61,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.apollo.runtime) // 最新版を確認して追加
+    implementation(libs.apollo.runtime)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
 }
 
@@ -67,5 +71,9 @@ configure<ApolloExtension> {
     service("service") {
         packageName.set("com.laamile.animalzukan")
     }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
