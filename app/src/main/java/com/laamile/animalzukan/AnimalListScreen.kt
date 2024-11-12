@@ -1,5 +1,6 @@
 package com.laamile.animalzukan
 
+import AnimalItem
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -11,13 +12,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun AnimalListScreen(
     modifier: Modifier = Modifier,
-    viewModel: AnimalListViewModel = hiltViewModel()
+    viewModel: AnimalListViewModel = hiltViewModel(),
+    onAnimalClick: (String) -> Unit
 ) {
     val animals by viewModel.animals.collectAsState()
 
     LazyColumn(modifier = modifier) {
         items(animals) { animal ->
-            AnimalItem(animal = animal)
+            AnimalItem(animal = animal, onClick = { onAnimalClick(it) })
         }
     }
 }
