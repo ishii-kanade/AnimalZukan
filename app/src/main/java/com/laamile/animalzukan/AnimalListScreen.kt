@@ -1,5 +1,6 @@
 package com.laamile.animalzukan
 
+import AnimalItem
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -17,7 +18,7 @@ fun AnimalListScreen(
 
     LazyColumn(modifier = modifier) {
         items(animals) { animal ->
-            AnimalItem(animal = animal)
+            AnimalItem(animal = animal, onClick = {})
         }
     }
 }
