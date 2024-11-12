@@ -51,15 +51,14 @@ fun AnimalDetailScreen(animalId: String?) {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(250.dp)
+                        .padding(bottom = 24.dp) // 余白を広げる
                 )
-
-                Spacer(modifier = Modifier.height(16.dp))
 
                 // 動物の名前と学名
                 Text(
                     text = animal.animalByID?.commonName ?: "",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
@@ -68,65 +67,15 @@ fun AnimalDetailScreen(animalId: String?) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
-                // その他の詳細情報
-                Text(
-                    text = "Description:",
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-                Text(
-                    text = animal.animalByID?.description ?: "",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Habitat:",
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-                Text(
-                    text = animal.animalByID?.habitat ?: "",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Diet:",
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-                Text(
-                    text = animal.animalByID?.diet ?: "",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Lifespan:",
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-                Text(
-                    text = animal.animalByID?.lifespan ?: "",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Conservation Status:",
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-                Text(
-                    text = animal.animalByID?.conservationStatus ?: "",
-                    style = MaterialTheme.typography.bodyMedium
+                // 詳細情報をセクションごとに表示
+                AnimalDetailSection(title = "Description", content = animal.animalByID?.description)
+                AnimalDetailSection(title = "Habitat", content = animal.animalByID?.habitat)
+                AnimalDetailSection(title = "Diet", content = animal.animalByID?.diet)
+                AnimalDetailSection(title = "Lifespan", content = animal.animalByID?.lifespan)
+                AnimalDetailSection(
+                    title = "Conservation Status", content = animal.animalByID?.conservationStatus
                 )
             }
         } ?: run {
@@ -135,4 +84,17 @@ fun AnimalDetailScreen(animalId: String?) {
         }
     }
 }
+
+@Composable
+fun AnimalDetailSection(title: String, content: String?) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
+    )
+    Text(
+        text = content ?: "", style = MaterialTheme.typography.bodyMedium
+    )
+}
+
 
