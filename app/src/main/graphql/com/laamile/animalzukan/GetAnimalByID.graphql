@@ -1,0 +1,14 @@
+query GetAnimalByID($animalID: ID!) {
+    animalByID(animalID: $animalID) {
+        animalID
+        commonName
+        scientificName
+        description
+        soundURL
+        imageURL
+        habitat
+        diet
+        lifespan
+        conservationStatus
+    }
+}
