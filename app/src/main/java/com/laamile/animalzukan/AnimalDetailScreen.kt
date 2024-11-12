@@ -10,7 +10,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +27,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.laamile.animalzukan.util.toAnimalEntity
 
 @Composable
 fun AnimalDetailScreen(animalId: String?) {
@@ -30,6 +36,7 @@ fun AnimalDetailScreen(animalId: String?) {
     // 動物の詳細データを取得
     viewModel.fetchAnimalDetail(animalId ?: "1")
     val animalDetail by viewModel.animalDetail.collectAsState()
+    val isFavorite by viewModel.isFavorite.collectAsState()
 
     // 詳細情報を表示するスクロール可能なレイアウト
     Box(
@@ -68,6 +75,14 @@ fun AnimalDetailScreen(animalId: String?) {
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
+
+                // お気に入りボタン
+                IconButton(onClick = { viewModel.toggleFavorite(animal.toAnimalEntity()) }) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites"
+                    )
+                }
 
                 // 詳細情報をセクションごとに表示
                 AnimalDetailSection(title = "Description", content = animal.animalByID?.description)
