@@ -1,5 +1,7 @@
 package com.laamile.animalzukan.di
 
+import com.laamile.animalzukan.infra.usecase.GetAnimalByIDUseCase
+import com.laamile.animalzukan.infra.usecase.GetAnimalByIDUseCaseImpl
 import com.laamile.animalzukan.infra.usecase.GetAnimalsUseCase
 import com.laamile.animalzukan.infra.usecase.GetAnimalsUseCaseImpl
 import dagger.Binds
@@ -17,4 +19,10 @@ abstract class UseCaseModule {
     abstract fun bindGetAnimalsUseCase(
         impl: GetAnimalsUseCaseImpl
     ): GetAnimalsUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindGetAnimalByIDUseCase(
+        impl: GetAnimalByIDUseCaseImpl
+    ): GetAnimalByIDUseCase
 }

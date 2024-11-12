@@ -3,13 +3,7 @@ query GetAnimals($limit: Int!) {
         animalID
         commonName
         scientificName
-        description
-        soundURL
         imageURL
-        habitat
-        diet
-        lifespan
-        conservationStatus
     }
 }
 
