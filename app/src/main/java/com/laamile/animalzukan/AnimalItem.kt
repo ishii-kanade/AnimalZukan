@@ -18,12 +18,12 @@ import com.laamile.animalzukan.GetAnimalsQuery
 import com.laamile.animalzukan.R
 
 @Composable
-fun AnimalItem(animal: GetAnimalsQuery.Animal, onClick: () -> Unit) {
+fun AnimalItem(animal: GetAnimalsQuery.Animal, onClick: (String) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onClick() }, // インタラクションのフィードバック
+            .clickable { onClick(animal.animalID) }, // インタラクションのフィードバック
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(2.dp)
     ) {

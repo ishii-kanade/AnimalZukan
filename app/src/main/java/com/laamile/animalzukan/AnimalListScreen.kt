@@ -12,13 +12,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun AnimalListScreen(
     modifier: Modifier = Modifier,
-    viewModel: AnimalListViewModel = hiltViewModel()
+    viewModel: AnimalListViewModel = hiltViewModel(),
+    onAnimalClick: (String) -> Unit
 ) {
     val animals by viewModel.animals.collectAsState()
 
     LazyColumn(modifier = modifier) {
         items(animals) { animal ->
-            AnimalItem(animal = animal, onClick = {})
+            AnimalItem(animal = animal, onClick = { onAnimalClick(it) })
         }
     }
 }
