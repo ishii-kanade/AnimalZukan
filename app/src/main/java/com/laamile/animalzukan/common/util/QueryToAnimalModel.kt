@@ -2,12 +2,12 @@ package com.laamile.animalzukan.common.util
 
 import com.laamile.animalzukan.GetAnimalByIDQuery
 import com.laamile.animalzukan.GetAnimalsQuery
-import com.laamile.animalzukan.common.model.AnimalModel
+import com.laamile.animalzukan.common.model.SimpleAnimalModel
 import com.laamile.animalzukan.common.model.DetailAnimalModel
 
-fun List<GetAnimalsQuery.Animal>.toAnimals(): List<AnimalModel> {
+fun List<GetAnimalsQuery.Animal>.toAnimals(): List<SimpleAnimalModel> {
     return this.map { animal ->
-        AnimalModel(
+        SimpleAnimalModel(
             animalID = animal.animalID,
             commonName = animal.commonName,
             scientificName = animal.scientificName,

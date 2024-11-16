@@ -3,7 +3,7 @@ package com.laamile.animalzukan.feature.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laamile.animalzukan.common.infra.usecase.GetAnimalsUseCase
-import com.laamile.animalzukan.common.model.AnimalModel
+import com.laamile.animalzukan.common.model.SimpleAnimalModel
 import com.laamile.animalzukan.common.util.toAnimals
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,8 +16,8 @@ class AnimalListViewModel @Inject constructor(
     private val getAnimalsUseCase: GetAnimalsUseCase
 ) : ViewModel() {
 
-    private val _animals = MutableStateFlow<List<AnimalModel>>(emptyList())
-    val animals: StateFlow<List<AnimalModel>> = _animals
+    private val _animals = MutableStateFlow<List<SimpleAnimalModel>>(emptyList())
+    val animals: StateFlow<List<SimpleAnimalModel>> = _animals
 
     init {
         fetchAnimals()

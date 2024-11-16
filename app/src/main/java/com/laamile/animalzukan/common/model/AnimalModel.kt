@@ -1,8 +1,8 @@
 package com.laamile.animalzukan.common.model
 
-data class AnimalModel(
-    val animalID: String,
-    val commonName: String,
-    val scientificName: String,
-    val imageURL: String
+sealed class AnimalModel(
+    open val animalID: String,
+    open val commonName: String,
+    open val scientificName: String,
+    open val imageURL: String
 )
