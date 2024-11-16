@@ -13,6 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -82,6 +84,21 @@ fun AnimalDetailScreen(animalId: String?) {
                         imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites"
                     )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // 鳴き声再生ボタン
+                Button(
+                    onClick = { viewModel.playAnimalSound(animal.soundURL) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.PlayArrow,
+                        contentDescription = "Play Sound",
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                    Text(text = "Play Sound")
                 }
 
                 // 詳細情報をセクションごとに表示
