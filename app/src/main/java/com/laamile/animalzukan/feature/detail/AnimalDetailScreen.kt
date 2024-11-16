@@ -1,34 +1,16 @@
 package com.laamile.animalzukan.feature.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberAsyncImagePainter
 import com.laamile.animalzukan.common.util.toAnimalEntity
 
 @Composable
@@ -47,86 +29,17 @@ fun AnimalDetailScreen(animalId: String?) {
             .padding(16.dp)
     ) {
         animalDetail?.let { animal ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp)
-            ) {
-                // 動物の画像
-                Image(
-                    painter = rememberAsyncImagePainter(animal.imageURL),
-                    contentDescription = "Image of ${animal.commonName}",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(250.dp)
-                        .padding(bottom = 24.dp) // 余白を広げる
-                )
-
-                // 動物の名前と学名
-                Text(
-                    text = animal.commonName,
-                    style = MaterialTheme.typography.headlineLarge,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-                Text(
-                    text = "Scientific Name: ${animal.scientificName}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // お気に入りボタン
-                IconButton(onClick = { viewModel.toggleFavorite(animal.toAnimalEntity()) }) {
-                    Icon(
-                        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                        contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // 鳴き声再生ボタン
-                Button(
-                    onClick = { viewModel.playAnimalSound(animal.soundURL) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.PlayArrow,
-                        contentDescription = "Play Sound",
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    Text(text = "Play Sound")
-                }
-
-                // 詳細情報をセクションごとに表示
-                AnimalDetailSection(title = "Description", content = animal.description)
-                AnimalDetailSection(title = "Habitat", content = animal.habitat)
-                AnimalDetailSection(title = "Diet", content = animal.diet)
-                AnimalDetailSection(title = "Lifespan", content = animal.lifespan)
-                AnimalDetailSection(
-                    title = "Conservation Status", content = animal.conservationStatus
-                )
-            }
+            AnimalDetailContent(
+                animal = animal,
+                isFavorite = isFavorite,
+                onToggleFavorite = { viewModel.toggleFavorite(animal.toAnimalEntity()) },
+                onPlaySound = { viewModel.playAnimalSound(animal.soundURL) }
+            )
         } ?: run {
             // データがロード中の場合にローディングインジケーターを表示
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
-}
-
-@Composable
-fun AnimalDetailSection(title: String, content: String?) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(top = 16.dp, bottom = 4.dp)
-    )
-    Text(
-        text = content ?: "", style = MaterialTheme.typography.bodyMedium
-    )
 }
 
 
