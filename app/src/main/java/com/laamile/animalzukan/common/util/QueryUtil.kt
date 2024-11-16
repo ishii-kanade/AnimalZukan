@@ -2,13 +2,14 @@ package com.laamile.animalzukan.common.util
 
 import com.laamile.animalzukan.GetAnimalByIDQuery
 import com.laamile.animalzukan.common.db.AnimalEntity
+import com.laamile.animalzukan.common.model.DetailAnimalModel
 
-fun GetAnimalByIDQuery.Data.toAnimalEntity(): AnimalEntity {
+fun DetailAnimalModel.toAnimalEntity(): AnimalEntity {
     return AnimalEntity(
-        animalID = this.animalByID?.animalID ?: "",
-        commonName = this.animalByID?.commonName ?: "",
-        scientificName = this.animalByID?.scientificName ?: "",
-        description = this.animalByID?.description ?: "",
-        imageURL = this.animalByID?.imageURL ?: ""
+        animalID = this.animalID,
+        commonName = this.commonName,
+        scientificName = this.scientificName,
+        description = this.description,
+        imageURL = this.imageURL
     )
 }

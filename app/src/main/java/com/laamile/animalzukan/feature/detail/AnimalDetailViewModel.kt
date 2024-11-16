@@ -2,10 +2,11 @@ package com.laamile.animalzukan.feature.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.laamile.animalzukan.GetAnimalByIDQuery
 import com.laamile.animalzukan.common.db.AnimalDao
 import com.laamile.animalzukan.common.db.AnimalEntity
 import com.laamile.animalzukan.common.infra.usecase.GetAnimalByIDUseCase
+import com.laamile.animalzukan.common.model.DetailAnimalModel
+import com.laamile.animalzukan.common.util.toDetailAnimalModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +35,8 @@ class AnimalDetailViewModel @Inject constructor(
         }
     }
 
-    private val _animalDetail = MutableStateFlow<GetAnimalByIDQuery.Data?>(null)
-    val animalDetail: StateFlow<GetAnimalByIDQuery.Data?> = _animalDetail
+    private val _animalDetail = MutableStateFlow<DetailAnimalModel?>(null)
+    val animalDetail: StateFlow<DetailAnimalModel?> = _animalDetail
 
     fun fetchAnimalDetail(animalId: String) {
         viewModelScope.launch {
@@ -47,7 +48,7 @@ class AnimalDetailViewModel @Inject constructor(
             try {
                 val response = getAnimalByIDUseCase.invoke(animalId)
                 if (response != null) {
-                    _animalDetail.emit(response.data)
+                    _animalDetail.emit(response.data?.toDetailAnimalModel())
                 }
 
             } catch (e: Exception) {

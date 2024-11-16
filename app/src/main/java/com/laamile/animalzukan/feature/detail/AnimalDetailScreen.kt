@@ -53,8 +53,8 @@ fun AnimalDetailScreen(animalId: String?) {
             ) {
                 // 動物の画像
                 Image(
-                    painter = rememberAsyncImagePainter(animal.animalByID?.imageURL),
-                    contentDescription = "Image of ${animal.animalByID?.commonName}",
+                    painter = rememberAsyncImagePainter(animal.imageURL),
+                    contentDescription = "Image of ${animal.commonName}",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -64,12 +64,12 @@ fun AnimalDetailScreen(animalId: String?) {
 
                 // 動物の名前と学名
                 Text(
-                    text = animal.animalByID?.commonName ?: "",
+                    text = animal.commonName,
                     style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Scientific Name: ${animal.animalByID?.scientificName}",
+                    text = "Scientific Name: ${animal.scientificName}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -85,12 +85,12 @@ fun AnimalDetailScreen(animalId: String?) {
                 }
 
                 // 詳細情報をセクションごとに表示
-                AnimalDetailSection(title = "Description", content = animal.animalByID?.description)
-                AnimalDetailSection(title = "Habitat", content = animal.animalByID?.habitat)
-                AnimalDetailSection(title = "Diet", content = animal.animalByID?.diet)
-                AnimalDetailSection(title = "Lifespan", content = animal.animalByID?.lifespan)
+                AnimalDetailSection(title = "Description", content = animal.description)
+                AnimalDetailSection(title = "Habitat", content = animal.habitat)
+                AnimalDetailSection(title = "Diet", content = animal.diet)
+                AnimalDetailSection(title = "Lifespan", content = animal.lifespan)
                 AnimalDetailSection(
-                    title = "Conservation Status", content = animal.animalByID?.conservationStatus
+                    title = "Conservation Status", content = animal.conservationStatus
                 )
             }
         } ?: run {
