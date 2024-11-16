@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laamile.animalzukan.common.db.AnimalDao
 import com.laamile.animalzukan.common.db.AnimalEntity
+import com.laamile.animalzukan.common.model.AnimalModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,8 +16,8 @@ class FavoriteAnimalsViewModel @Inject constructor(
     private val animalDao: AnimalDao
 ) : ViewModel() {
 
-    private val _favoriteAnimals = MutableStateFlow<List<AnimalEntity>>(emptyList())
-    val favoriteAnimals: StateFlow<List<AnimalEntity>> = _favoriteAnimals
+    private val _favoriteAnimals = MutableStateFlow<List<AnimalModel>>(emptyList())
+    val favoriteAnimals: StateFlow<List<AnimalModel>> = _favoriteAnimals
 
     init {
         loadFavoriteAnimals()
@@ -24,7 +25,11 @@ class FavoriteAnimalsViewModel @Inject constructor(
 
     private fun loadFavoriteAnimals() {
         viewModelScope.launch {
-            _favoriteAnimals.value = animalDao.getAllFavorites()
+            // お気に入りのリストを取得
+            val favorites = animalDao.getAllFavorites()
+
+            // Animalに変換してから、_favoriteAnimalsにセット
+            _favoriteAnimals.value = favorites.map { it.toAnimal() }
         }
     }
 

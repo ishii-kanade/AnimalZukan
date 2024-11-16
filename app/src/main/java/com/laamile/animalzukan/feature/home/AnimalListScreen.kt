@@ -19,7 +19,7 @@ fun AnimalListScreen(
 
     LazyColumn(modifier = modifier) {
         items(animals) { animal ->
-            AnimalItem(animal = animal, onClick = { onAnimalClick(it) })
+            AnimalItem(animalModel = animal, onClick = { onAnimalClick(it) })
         }
     }
 }
