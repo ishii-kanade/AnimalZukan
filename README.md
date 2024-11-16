@@ -1,2 +1,14 @@
-### AnimalZukan - 動物図鑑アプリ
-AnimalZukanは、アーキテクチャ設計とGraphQLの研究目的で開発されたAndroidアプリです。このアプリは、GraphQLを活用したデータ取得と、Android開発におけるアーキテクチャ設計の検証を行うための実験的なプロジェクトです。
+### AnimalZukan - 実験用動物図鑑アプリ
+
+AnimalZukanは、Androidアプリの機能を試すための実験的なプロジェクトです。
+
+このプロジェクトでは、以下の技術を活用しています。
+
+- **Clean Architecture**
+- **Room**
+- **Hilt**
+- **MediaPlayer**
+- **Coil**
+- **GraphQL**
+
+AnimalZukanは、新しい技術や機能を試す場として設計されており、Androidアプリケーション開発のベストプラクティスを探求するために利用されています。
