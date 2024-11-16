@@ -17,11 +17,9 @@ import com.laamile.animalzukan.feature.favorite.FavoriteAnimalsScreen
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(navController)
-        }
-    ) { innerPadding ->
+    Scaffold(bottomBar = {
+        BottomNavigationBar(navController)
+    }) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = NavRoutes.ANIMAL_LIST,
@@ -33,11 +31,12 @@ fun MainScreen(navController: NavHostController) {
                 })
             }
             composable(NavRoutes.FAVORITE_LIST) {
-                FavoriteAnimalsScreen()
+                FavoriteAnimalsScreen(onAnimalClick = { animalId ->
+                    navController.navigate(NavRoutes.animalDetailRoute(animalId))
+                })
             }
             composable(
-                NavRoutes.ANIMAL_DETAIL,
-                arguments = listOf(navArgument(NavRoutes.ANIMAL_ID_KEY) {
+                NavRoutes.ANIMAL_DETAIL, arguments = listOf(navArgument(NavRoutes.ANIMAL_ID_KEY) {
                     type = NavType.StringType
                 })
             ) { backStackEntry ->
