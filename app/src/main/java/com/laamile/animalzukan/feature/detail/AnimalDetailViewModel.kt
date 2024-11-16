@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laamile.animalzukan.common.db.AnimalDao
 import com.laamile.animalzukan.common.db.AnimalEntity
+import com.laamile.animalzukan.common.infra.SoundPlayer
 import com.laamile.animalzukan.common.infra.usecase.GetAnimalByIDUseCase
 import com.laamile.animalzukan.common.model.DetailAnimalModel
 import com.laamile.animalzukan.common.util.toDetailAnimalModel
@@ -17,11 +18,16 @@ import javax.inject.Inject
 @HiltViewModel
 class AnimalDetailViewModel @Inject constructor(
     private val getAnimalByIDUseCase: GetAnimalByIDUseCase,
-    private val animalDao: AnimalDao
+    private val animalDao: AnimalDao,
+    private val soundPlayer: SoundPlayer
 ) : ViewModel() {
     // お気に入り状態を保持する
     private val _isFavorite = MutableStateFlow(false)
     val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
+
+    fun playAnimalSound(soundURL: String) {
+        soundPlayer.playSoundFromUrl(soundURL)
+    }
 
     // お気に入りの追加・削除
     fun toggleFavorite(animal: AnimalEntity) {
@@ -56,5 +62,10 @@ class AnimalDetailViewModel @Inject constructor(
                 e.printStackTrace()
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        soundPlayer.stopSound()
     }
 }
