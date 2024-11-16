@@ -1,4 +1,4 @@
-### AnimalZukan - 実験用動物図鑑アプリ
+### AnimalZukan - 動物図鑑アプリ
 
 AnimalZukanは、Androidアプリの機能を試すための実験的なプロジェクトです。
 
